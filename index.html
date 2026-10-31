@@ -1,6 +1,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,118 +9,556 @@
     <title>Balozi Echelons</title>
 
     <style>
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        html, body {
-            width: 100%;
-            height: 100%;
-            font-family: Arial, sans-serif;
-            background: #525659;
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f4f6f9;
+            color: #123d60;
+        }
+
+        /* HEADER */
+
+        header {
+           color: white;
+            text-align: center;
+            padding: 30px 15px;
+        }
+
+        .site-logo {
+            display: block;
+            width: 220px;
+            max-width: 100%;
+            height: auto;
+            object-fit: contain;
+            margin: 0 auto 18px;
+        }
+
+        header h1 {
+            font-size: 28px;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+
+        header p {
+            color: #00bdbd;
+            font-size: 13px;
+            letter-spacing: 1.5px;
+        }
+
+
+        /* PDF SECTION */
+
+        .document-section {
+            padding: 25px 15px;
+            background: #e9edf2;
+        }
+
+        .document-section h2 {
+            text-align: center;
+            margin-bottom: 18px;
+            color: #123d60;
+            font-size: 21px;
         }
 
         #pdf-container {
             width: 100%;
-            height: 100vh;
-            overflow-y: auto;
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 15px 0;
             gap: 15px;
         }
 
         .pdf-page {
             display: block;
-            width: 95%;
             max-width: 900px;
+            width: 100%;
             height: auto;
             background: white;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+            box-shadow: 0 3px 12px rgba(0,0,0,0.15);
         }
 
         #status {
-            color: white;
-            padding: 20px;
             text-align: center;
+            padding: 20px;
+            color: #123d60;
         }
+
+
+        /* SIGN UP SECTION */
+
+        .signup-section {
+            max-width: 1100px;
+            margin: auto;
+            padding: 45px 20px 55px;
+        }
+
+        .section-heading {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .section-heading h2 {
+            font-size: 27px;
+            color: #123d60;
+            margin-bottom: 10px;
+        }
+
+        .section-heading .gold-line {
+            width: 55px;
+            height: 3px;
+            background: #00bdbd;
+            margin: 0 auto 15px;
+        }
+
+        .section-heading p {
+            color: #68778b;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+
+        /* FORM CARDS */
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        .form-card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px 22px;
+            text-align: center;
+            border: 1px solid #e5e9ef;
+            border-top: 3px solid #00bdbd;
+            box-shadow: 0 5px 18px rgba(0,0,0,0.05);
+
+            transition: transform 0.3s ease,
+                        box-shadow 0.3s ease;
+        }
+
+        .form-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.10);
+        }
+
+        .form-icon {
+            width: 65px;
+            height: 65px;
+            background: #e8f7f7;
+            color: #123d60;
+            border-radius: 50%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            margin: 0 auto 20px;
+            font-size: 28px;
+        }
+
+        .form-card h3 {
+            font-size: 20px;
+            margin-bottom: 12px;
+            color: #123d60;
+        }
+
+        .form-card p {
+            color: #718096;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            min-height: 45px;
+        }
+
+        .form-button {
+            display: block;
+            background: #123d60;
+            color: white;
+            text-decoration: none;
+
+            padding: 13px 18px;
+            border-radius: 7px;
+
+            font-size: 14px;
+            font-weight: bold;
+
+            transition: background 0.3s ease,
+                        color 0.3s ease;
+        }
+
+        .form-button:hover {
+            background: #00bdbd;
+            color: #123d60;
+        }
+
+        .form-button span {
+            margin-left: 6px;
+        }
+
+
+        /* FOOTER */
+
+        footer {
+            background: #123d60;
+            color: #cbd3df;
+            text-align: center;
+
+            padding: 22px 15px;
+            font-size: 13px;
+
+            border-top: 3px solid #00bdbd;
+        }
+
+
+        /* MOBILE RESPONSIVENESS */
+
+        @media (max-width: 768px) {
+
+            header {
+                padding: 25px 15px;
+            }
+
+            header h1 {
+                font-size: 23px;
+            }
+
+            header p {
+                font-size: 11px;
+                letter-spacing: 1px;
+            }
+
+            .site-logo {
+                width: 175px;
+                max-width: 85%;
+                margin-bottom: 15px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+                gap: 18px;
+            }
+
+            .signup-section {
+                padding: 35px 18px;
+            }
+
+            .section-heading h2 {
+                font-size: 24px;
+            }
+
+            .form-card {
+                padding: 28px 20px;
+            }
+
+        }
+
+
+        /* SMALL PHONES */
+
+        @media (max-width: 400px) {
+
+            header h1 {
+                font-size: 20px;
+            }
+
+            .site-logo {
+                width: 155px;
+            }
+
+            .document-section h2 {
+                font-size: 19px;
+            }
+
+        }
+
     </style>
+
 </head>
+
 
 <body>
 
-    <div id="pdf-container">
-        <p id="status">Loading document...</p>
-    </div>
+
+    <!-- HEADER -->
+
+    <header>
+
+        <img
+            src="./LOGO.PNG"
+            alt="Balozi Echelons Logo"
+            class="site-logo"
+        >
+
+  
+
+    </header>
+
+
+
+    <!-- PDF DOCUMENT SECTION -->
+
+    <section class="document-section">
+
+
+        <div id="pdf-container">
+
+            <p id="status">Loading document...</p>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- SIGN UP FORMS SECTION -->
+
+    <section class="signup-section">
+
+        <div class="section-heading">
+
+            <h2>Sign Up Forms</h2>
+
+            <div class="gold-line"></div>
+
+        </div>
+
+
+
+        <div class="form-grid">
+
+
+            <!-- KIDS & TEENS -->
+
+            <div class="form-card">
+
+                <div class="form-icon">
+                    👦
+                </div>
+
+                <h3>Kids & Teens</h3>
+
+                <p>
+                    Sign up form for Kids and Teens.
+                </p>
+
+                <a
+                    href="https://forms.gle/hbXLAZ6ijHmqXGL49"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="form-button"
+                >
+
+                    Sign Up Now <span>↗</span>
+
+                </a>
+
+            </div>
+
+
+
+            <!-- ADULTS -->
+
+            <div class="form-card">
+
+                <div class="form-icon">
+                    👤
+                </div>
+
+                <h3>Adults</h3>
+
+                <p>
+                    Sign up form for adults.
+                </p>
+
+                <a
+                    href="https://forms.gle/GvGTsWveMkvKGSut5"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="form-button"
+                >
+
+                    Sign Up Now <span>↗</span>
+
+                </a>
+
+            </div>
+
+
+
+            <!-- FAMILY -->
+
+            <div class="form-card">
+
+                <div class="form-icon">
+                    👨‍👩‍👧‍👦
+                </div>
+
+                <h3>Family</h3>
+
+                <p>
+                    Sign up form for families.
+                </p>
+
+                <a
+                    href="https://forms.gle/u9FoqXo4WGAX28KbA"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="form-button"
+                >
+
+                    Sign Up Now <span>↗</span>
+
+                </a>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        &copy; 2026 Balozi Echelons. All Rights Reserved.
+
+    </footer>
+
+
+
+    <!-- PDF.JS VIEWER -->
 
     <script type="module">
 
         import * as pdfjsLib from
         'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.10.38/pdf.min.mjs';
 
+
         pdfjsLib.GlobalWorkerOptions.workerSrc =
         'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.10.38/pdf.worker.min.mjs';
 
+
         const container = document.getElementById('pdf-container');
+
         const status = document.getElementById('status');
 
+
         async function displayPDF() {
+
             try {
+
                 const pdf = await pdfjsLib.getDocument(
                     './echelons-balozi.pdf?v=2'
                 ).promise;
 
+
                 status.remove();
 
-                for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
+
+                for (
+                    let pageNum = 1;
+                    pageNum <= pdf.numPages;
+                    pageNum++
+                ) {
 
                     const page = await pdf.getPage(pageNum);
 
-                    const viewport = page.getViewport({ scale: 1 });
 
-                    const scale = Math.min(
-                        (container.clientWidth - 30) / viewport.width,
-                        2
+                    const viewport = page.getViewport({
+                        scale: 1
+                    });
+
+
+                    const availableWidth = Math.min(
+                        container.clientWidth - 30,
+                        900
                     );
+
+
+                    const scale = availableWidth / viewport.width;
+
 
                     const scaledViewport = page.getViewport({
                         scale: scale
                     });
 
+
                     const canvas = document.createElement('canvas');
+
                     canvas.className = 'pdf-page';
 
+
                     const context = canvas.getContext('2d');
+
+
                     const dpr = window.devicePixelRatio || 1;
 
-                    canvas.width = scaledViewport.width * dpr;
-                    canvas.height = scaledViewport.height * dpr;
 
-                    canvas.style.width = scaledViewport.width + 'px';
-                    canvas.style.height = scaledViewport.height + 'px';
+                    canvas.width = Math.floor(
+                        scaledViewport.width * dpr
+                    );
+
+                    canvas.height = Math.floor(
+                        scaledViewport.height * dpr
+                    );
+
+
+                    canvas.style.width =
+                        scaledViewport.width + 'px';
+
+                    canvas.style.height =
+                        scaledViewport.height + 'px';
+
 
                     container.appendChild(canvas);
 
+
                     await page.render({
+
                         canvasContext: context,
+
                         viewport: scaledViewport,
-                        transform: [dpr, 0, 0, dpr, 0, 0]
+
+                        transform: [
+                            dpr, 0,
+                            0, dpr,
+                            0, 0
+                        ]
+
                     }).promise;
+
                 }
 
+
             } catch (error) {
-                status.textContent =
-                    'Unable to load PDF. Please check the PDF file path.';
+
                 console.error(error);
+
+                status.textContent =
+                    'Unable to load the document. Please check the PDF file.';
+
             }
+
         }
+
 
         displayPDF();
 
+
     </script>
 
+
 </body>
+
 </html>
