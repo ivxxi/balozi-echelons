@@ -17,24 +17,109 @@
         html, body {
             width: 100%;
             height: 100%;
+            font-family: Arial, sans-serif;
+            background: #525659;
         }
 
-        iframe {
-            display: block;
+        #pdf-container {
             width: 100%;
             height: 100vh;
-            border: none;
-            overflow: auto;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 15px 0;
+            gap: 15px;
+        }
+
+        .pdf-page {
+            display: block;
+            width: 95%;
+            max-width: 900px;
+            height: auto;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+        }
+
+        #status {
+            color: white;
+            padding: 20px;
+            text-align: center;
         }
     </style>
 </head>
 
 <body>
 
-    <iframe
-        src="./echelons-balozi.pdf#toolbar=1&navpanes=1&scrollbar=1"
-        title="Balozi Echelons Document">
-    </iframe>
+    <div id="pdf-container">
+        <p id="status">Loading document...</p>
+    </div>
+
+    <script type="module">
+
+        import * as pdfjsLib from
+        'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.10.38/pdf.min.mjs';
+
+        pdfjsLib.GlobalWorkerOptions.workerSrc =
+        'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.10.38/pdf.worker.min.mjs';
+
+        const container = document.getElementById('pdf-container');
+        const status = document.getElementById('status');
+
+        async function displayPDF() {
+            try {
+                const pdf = await pdfjsLib.getDocument(
+                    './echelons-balozi.pdf?v=2'
+                ).promise;
+
+                status.remove();
+
+                for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
+
+                    const page = await pdf.getPage(pageNum);
+
+                    const viewport = page.getViewport({ scale: 1 });
+
+                    const scale = Math.min(
+                        (container.clientWidth - 30) / viewport.width,
+                        2
+                    );
+
+                    const scaledViewport = page.getViewport({
+                        scale: scale
+                    });
+
+                    const canvas = document.createElement('canvas');
+                    canvas.className = 'pdf-page';
+
+                    const context = canvas.getContext('2d');
+                    const dpr = window.devicePixelRatio || 1;
+
+                    canvas.width = scaledViewport.width * dpr;
+                    canvas.height = scaledViewport.height * dpr;
+
+                    canvas.style.width = scaledViewport.width + 'px';
+                    canvas.style.height = scaledViewport.height + 'px';
+
+                    container.appendChild(canvas);
+
+                    await page.render({
+                        canvasContext: context,
+                        viewport: scaledViewport,
+                        transform: [dpr, 0, 0, dpr, 0, 0]
+                    }).promise;
+                }
+
+            } catch (error) {
+                status.textContent =
+                    'Unable to load PDF. Please check the PDF file path.';
+                console.error(error);
+            }
+        }
+
+        displayPDF();
+
+    </script>
 
 </body>
 </html>
